@@ -22,4 +22,6 @@ Route::resource('students', 'StudentController');
 Route::resource('fees', 'FeeController');
 //Extra route to handle direct payment from Students index i.e. /students
 Route::get('/directpay/{student}', 'FeeController@directPay')->name('fees.directpay');
+//Search route
+Route::get('search/students/{student}','StudentController@search')->name('students.search');
 

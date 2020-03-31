@@ -30,15 +30,5 @@ class Fee extends Model
         return $this->belongsTo('App\Student');
     }
 
-    /**
-     * Get the amount in a more accountable format
-     *
-     * @param Decimal $value
-     * @return int
-     */
-    public function getAmountAttribute($value)
-    {
-        return number_format($value, 2);
-    }
 
 }

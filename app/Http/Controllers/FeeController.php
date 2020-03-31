@@ -17,10 +17,12 @@ class FeeController extends Controller
      */
     public function index()
     {
+        $feesTotal = Fee::sum('amount');
         $fees = Fee::latest()->paginate(10);
 
         return view('46728.fees.index', compact('fees'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5)
+            ->with('feesTotal',$feesTotal);
     }
 
     /**

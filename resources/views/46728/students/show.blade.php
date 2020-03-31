@@ -31,9 +31,8 @@
                         <h5 class="card-title">Payments:</h5>
                         @php
                             $total = $student->fees->reduce(function ($sum, $fee) {
-                                $fmt = numfmt_create( 'en_EN', NumberFormatter::TYPE_INT32  );
-                                $amount = numfmt_parse($fmt,$fee->amount);
-                            return $sum += $amount;
+                                $amount = (double) $fee->amount;
+                                return $sum += $amount;
                             }, 0);
                         @endphp
                         <h6>Total: {{$total}}</h6>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,7 +19,7 @@ class StudentController extends Controller
         $students = Student::latest()->paginate(10);
 
         return view('46728.students.index', compact('students'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with((request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -105,7 +106,7 @@ class StudentController extends Controller
             'dob' => 'required|date',
             'course' => 'required'
         ], [], $customAttributes);
-        
+
         $student->update($request->all());
 
 
@@ -127,5 +128,24 @@ class StudentController extends Controller
 
         return redirect()->route('students.index')
             ->with('success', 'Student deleted successfully');
+    }
+
+    /**
+     * Get all the fees paid by a user
+     * @param Student $student
+     * @return JsonResponse
+     */
+    public function search(Student $student)
+    {
+
+        $total = $student->fees->reduce(function ($sum, $fee) {
+            $amount = (double) $fee->amount;
+            return $sum += $amount;
+        }, 0);
+
+        return response()->json([
+            'total_payments' => $total,
+            'student' => $student
+        ]);
     }
 }

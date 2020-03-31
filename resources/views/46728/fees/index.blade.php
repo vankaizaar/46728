@@ -8,6 +8,8 @@
             <div class="col-12">
                 <div class="float-left">
                     <h1>Fees</h1>
+
+                    <h2 class="text-info">Total Fees Paid: Ksh. {{$feesTotal}} </h2>
                 </div>
                 <div class="float-right">
                     <a class="btn btn-success" href="{{ route('fees.create') }}"> New Payment</a>
@@ -31,7 +33,7 @@
         <div class="row my-4">
             <div class="col-12">
                 <h4>Filter payments</h4>
-                <input class="form-control" id="filter-fees" type="text" placeholder="Search..">
+                <input class="form-control" id="filter-fees" type="text" placeholder="Filter..">
             </div>
         </div>
     </div>
