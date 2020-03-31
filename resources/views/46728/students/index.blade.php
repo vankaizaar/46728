@@ -118,6 +118,11 @@
                                 total = msg.total_payments;
                             search_results.innerHTML = "<h4 class='text-success'>" + name + "</h4>" +
                                 "<p><strong>Total Paid: </strong>" + total + "</p>";
+                            $.each(msg.student.fees, function (index, element) {
+                                var d = new Date(element.created_at);
+                                var computedDate = (d.getDate()) + "/" + (d.getMonth() + 1) + "/" + (d.getFullYear()) + " at " + (d.getHours()) + ":" + (d.getMinutes()) + ":" + (d.getSeconds());
+                                $(search_results).append("<p><strong>Amount: </strong>" + element.amount + " <strong> Paid: </strong>" + computedDate + "</p>");
+                            });
                         },
                         statusCode: {
                             404: function () {
