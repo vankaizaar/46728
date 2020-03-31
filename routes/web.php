@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Landing page route
 Route::get('/', function () {
     return view('46728.welcome');
 });
+//Student routes
+Route::resource('students', 'StudentController');
+//Fees routes
+Route::resource('fees', 'FeeController');
+//Extra route to handle direct payment from Students index i.e. /students
+Route::get('/directpay/{student}', 'FeeController@directPay')->name('fees.directpay');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
