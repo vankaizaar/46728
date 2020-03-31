@@ -50,7 +50,7 @@ class StudentController extends Controller
             'first_name' => 'required|string|min:2|max:20',
             'last_name' => 'nullable|string|min:2|max:20',
             'surname' => 'required|string|min:2|max:20',
-            'dob' => 'required|date',
+            'dob' => 'required|date|before: 16 years ago',
             'course' => 'required'
         ], [], $customAttributes);
 
@@ -103,7 +103,7 @@ class StudentController extends Controller
             'first_name' => 'required|string|min:2|max:20',
             'last_name' => 'nullable|string|min:2|max:20',
             'surname' => 'required|string|min:2|max:20',
-            'dob' => 'required|date',
+            'dob' => 'required|date|before: 16 years ago',
             'course' => 'required'
         ], [], $customAttributes);
 
@@ -139,7 +139,7 @@ class StudentController extends Controller
     {
 
         $total = $student->fees->reduce(function ($sum, $fee) {
-            $amount = (double) $fee->amount;
+            $amount = (double)$fee->amount;
             return $sum += $amount;
         }, 0);
 
